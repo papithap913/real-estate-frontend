@@ -16,7 +16,7 @@ const Login = () => {
     e.preventDefault();
     try {
       const res = await axios.post(
-        "https://real-estate-backend-main-c4xs.onrender.com/api/auth/login", // Full backend endpoint
+        "https://real-estate-backend-main-x4c0.onrender.com/api/auth/login", // Full backend endpoint
         formData,
         {
           headers: {
