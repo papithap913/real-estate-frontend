@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import axios from "../axiosConfig";
+import axios from "axios"; // Removed "../axiosConfig" for clarity; using direct axios import.
 
 const Register = () => {
   const [formData, setFormData] = useState({
@@ -16,7 +16,11 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("/auth/register", formData);
+      // Update the URL to include the full backend endpoint
+      const res = await axios.post(
+        "https://real-estate-backend-21lej.onrender.com/api/auth/register",
+        formData
+      );
       setMessage(res.data.message);
     } catch (err) {
       setMessage(err.response?.data?.error || "Error occurred");
