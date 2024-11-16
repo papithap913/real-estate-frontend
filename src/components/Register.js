@@ -18,7 +18,7 @@ const Register = () => {
     try {
       // Update the URL to include the full backend endpoint
       const res = await axios.post(
-        "https://real-estate-backend-main-c4xs.onrender.com//api/auth/register",
+        "https://real-estate-backend-main-jedi.onrender.com/api/auth/register",
         formData
       );
       setMessage(res.data.message);
