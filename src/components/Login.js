@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import axios from "../axiosConfig";
+import axios from "axios"; // Removed "../axiosConfig" for simplicity, using direct axios import.
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -15,11 +15,27 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("/auth/login", formData);
-      localStorage.setItem("token", res.data.token);
-      setMessage("Logged in successfully");
+      const res = await axios.post(
+        "https://real-estate-backend-main-c4xs.onrender.com/api/auth/login", // Full backend endpoint
+        formData,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+          withCredentials: true, // Required if backend uses cookies/sessions
+        }
+      );
+
+      // Store token in localStorage (if provided by backend)
+      if (res.data.token) {
+        localStorage.setItem("token", res.data.token);
+        setMessage("Logged in successfully!");
+      } else {
+        setMessage("Login successful, but no token received!");
+      }
     } catch (err) {
-      setMessage(err.response?.data?.error || "Login failed");
+      // Handle errors, including backend response errors
+      setMessage(err.response?.data?.error || "Login failed. Please try again.");
     }
   };
 
