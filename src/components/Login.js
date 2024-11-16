@@ -19,7 +19,7 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("/api/auth/login", formData); // Replace with correct login endpoint
+      const res = await axios.post("https://real-estate-backend-main-x4c0.onrender.com/api/auth/login", formData); // Replace with correct login endpoint
       const userData = res.data; // Assuming the response contains the user data
       localStorage.setItem("user", JSON.stringify(userData)); // Save user data
       setMessage("Login successful!");
