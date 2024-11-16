@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import axios from "axios"; // Removed "../axiosConfig" for simplicity, using direct axios import.
+import axios from "../axiosConfig"; // Ensure axiosConfig is properly set up
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -7,35 +8,24 @@ const Login = () => {
     password: "",
   });
   const [message, setMessage] = useState("");
+  const navigate = useNavigate(); // Hook to navigate to other pages
 
+  // Handle form input changes
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post(
-        "https://real-estate-backend-main-x4c0.onrender.com/api/auth/login", // Full backend endpoint
-        formData,
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-          withCredentials: true, // Required if backend uses cookies/sessions
-        }
-      );
-
-      // Store token in localStorage (if provided by backend)
-      if (res.data.token) {
-        localStorage.setItem("token", res.data.token);
-        setMessage("Logged in successfully!");
-      } else {
-        setMessage("Login successful, but no token received!");
-      }
+      const res = await axios.post("/api/auth/login", formData); // Replace with correct login endpoint
+      const userData = res.data; // Assuming the response contains the user data
+      localStorage.setItem("user", JSON.stringify(userData)); // Save user data
+      setMessage("Login successful!");
+      navigate("/dashboard"); // Redirect to dashboard
     } catch (err) {
-      // Handle errors, including backend response errors
-      setMessage(err.response?.data?.error || "Login failed. Please try again.");
+      setMessage(err.response?.data?.error || "Error occurred during login");
     }
   };
 
