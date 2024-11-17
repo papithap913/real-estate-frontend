@@ -2,7 +2,7 @@
 import axios from "axios";
 
 const instance = axios.create({
-  baseURL: "https://real-estate-backend-main-x4c0.onrender.com/api", // Replace with your backend URL
+  baseURL: "https://real-estate-backend-main-x4c0.onrender.com", // Replace with your backend URL
 });
 
 // Interceptor to add token to requests
