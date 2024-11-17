@@ -9,7 +9,7 @@ const PropertyList = () => {
   useEffect(() => {
     const fetchProperties = async () => {
       try {
-        await axios.get("/properties");
+        const res = await axios.get("/properties");
         setProperties(res.data);
         setLoading(false);
       } catch (err) {
