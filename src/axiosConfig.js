@@ -1,18 +1,17 @@
-import axios from 'axios';
+// src/axiosConfig.js
+import axios from "axios";
 
-const axiosInstance = axios.create({
-  baseURL: process.env.REACT_APP_API_URL,
+const instance = axios.create({
+  baseURL: "https://real-estate-backend-main-x4c0.onrender.com/api", // Replace with your backend URL
 });
 
-// Automatically attach token to requests if available
-axiosInstance.interceptors.request.use((config) => {
+// Interceptor to add token to requests
+instance.interceptors.request.use((config) => {
   const token = localStorage.getItem("token");
   if (token) {
     config.headers.Authorization = `Bearer ${token}`;
   }
   return config;
-}, (error) => {
-  return Promise.reject(error);
 });
 
-export default axiosInstance;
+export default instance;
