@@ -13,7 +13,7 @@ const AddProperty = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("/addproperty", formData);
+      await axios.post("/addproperty", formData);
       setMessage("Property added successfully!");
       setFormData({ title: "", description: "", price: "" });
     } catch (err) {
