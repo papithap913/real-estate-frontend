@@ -23,7 +23,7 @@ const Login = () => {
       const userData = res.data; // Assuming the response contains the user data
       localStorage.setItem("user", JSON.stringify(userData)); // Save user data
       setMessage("Login successful!");
-      navigate("/properties"); // Redirect to dashboard
+      navigate("/PropertyList.js"); // Redirect to dashboard
     } catch (err) {
       setMessage(err.response?.data?.error || "Error occurred during login");
     }
