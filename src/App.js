@@ -5,7 +5,7 @@ import Login from "./components/Login";
 import AgentPortal from "./components/AgentPortal";
 import Register from "./components/Register";
 import AddProperty from "./components/AddProperty";
-import PropertyList from "./components/PropertyList";
+import properties from "./components/PropertyList";
 import EditProperty from "./components/EditProperty";
 import './App.css';
 
