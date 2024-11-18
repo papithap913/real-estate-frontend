@@ -7,8 +7,18 @@ function AddProperty() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const token = localStorage.getItem("authToken");
+
     try {
-      const response = await axios.post("/addproperty", { name: propertyName, price });
+      const response = await axios.post(
+        "/addproperty",
+        { name: propertyName, price },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
       console.log("Property added successfully:", response.data);
     } catch (error) {
       console.error("Error occurred:", error.response?.data || error.message);
