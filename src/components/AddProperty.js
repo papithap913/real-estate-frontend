@@ -1,59 +1,37 @@
-// src/components/AddProperty.js
 import React, { useState } from "react";
 import axios from "../axiosConfig";
 
-const AddProperty = () => {
-  const [formData, setFormData] = useState({ title: "", description: "", price: "" });
-  const [message, setMessage] = useState("");
-
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
+function AddProperty() {
+  const [propertyName, setPropertyName] = useState("");
+  const [price, setPrice] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("/addproperty", formData);
-      setMessage("Property added successfully!");
-      setFormData({ title: "", description: "", price: "" });
-    } catch (err) {
-      setMessage(err.response?.data?.message || "Error occurred");
+      const response = await axios.post("/addproperty", { name: propertyName, price });
+      console.log("Property added successfully:", response.data);
+    } catch (error) {
+      console.error("Error occurred:", error.response?.data || error.message);
     }
   };
 
   return (
-    <div>
-      <h2>Add Property</h2>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          name="title"
-          placeholder="Title"
-          value={formData.title}
-          onChange={handleChange}
-          required
-        />
-        <textarea
-          name="description"
-          placeholder="Description"
-          value={formData.description}
-          onChange={handleChange}
-          required
-        />
-        <input
-          type="number"
-          name="price"
-          placeholder="Price"
-          value={formData.price}
-          onChange={handleChange}
-          required
-        />
-        <button type="submit">Add Property</button>
-      </form>
-      <p>{message}</p>
-    </div>
+    <form onSubmit={handleSubmit}>
+      <input
+        type="text"
+        placeholder="Property Name"
+        value={propertyName}
+        onChange={(e) => setPropertyName(e.target.value)}
+      />
+      <input
+        type="number"
+        placeholder="Price"
+        value={price}
+        onChange={(e) => setPrice(e.target.value)}
+      />
+      <button type="submit">Add Property</button>
+    </form>
   );
-};
+}
 
 export default AddProperty;
-
