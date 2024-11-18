@@ -21,7 +21,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/agents" element={<AgentPortal />} />
         <Route path="/addproperty" element={<AddProperty />} />
-        <Route path="/properties" element={<PropertyList />} />
+        <Route path="/properties" element={<properties />} />
         <Route path="/editproperty/:id" element={<EditProperty />} />
       </Routes>
     </Router>
